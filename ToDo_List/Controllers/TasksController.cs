@@ -15,7 +15,7 @@ namespace ToDo_List.Controllers
     {
         [HttpPost]
         [ProducesResponseType(typeof(ResponseRegisteredTasksJson), StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public IActionResult Register([FromBody] RequestTaskJson request)
         {
             var response = new RegisterTasksUseCase().Execute(request);
@@ -25,7 +25,7 @@ namespace ToDo_List.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(ResponseAllTasksJson), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public IActionResult GetAll()
         {
             var useCase = new GetAllTasksUseCase();
@@ -38,7 +38,7 @@ namespace ToDo_List.Controllers
         [HttpGet]
         [Route("{id}")]
         [ProducesResponseType(typeof(ResponseRegisteredTasksJson), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public IActionResult Get(int id) 
         {
             var useCase = new GetByIdUseCase();
@@ -51,7 +51,7 @@ namespace ToDo_List.Controllers
         [HttpPut]
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public IActionResult Update(int id, [FromBody] RequestTaskJson request)
         {
             var useCase = new UpdateByIdUseCase();
@@ -64,7 +64,7 @@ namespace ToDo_List.Controllers
         [HttpDelete]
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public IActionResult Delete(int id)
         {
             var useCase = new DeleteByIdUseCase();
